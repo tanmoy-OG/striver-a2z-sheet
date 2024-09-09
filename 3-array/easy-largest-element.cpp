@@ -1,21 +1,37 @@
 #include <bits/stdc++.h>
-
 using namespace std;
 
-int largest(vector<int> &arr, int n) {
-  int mini = INT_MIN;
+/*
+  Time complexity: O(nlogn)
+  Space complexity: O(1)
+*/
+int largestBrute(vector<int> &arr) {
+  sort(arr.begin(), arr.end());
+  int maxi = arr[arr.size() - 1];
+  return maxi;
+}
+
+/*------------------------------------*/
+
+/*
+  Time complexity: O(n)
+  Space complexity: O(1)
+*/
+int largestOptimal(vector<int> &arr) {
+  int maxi = INT_MIN;
   for (auto i : arr)
-    if (i > mini)
-      mini = i;
-  return mini;
+    maxi = max(maxi, i);
+  return maxi;
 }
 
 int main() {
   int n;
   cin >> n;
   vector<int> arr(n);
-  for (auto &i : arr)
-    cin >> i;
-  cout << largest(arr, n) << endl;
+  for (int i = 0; i < n; i++)
+    cin >> arr[i];
+
+  cout << largestBrute(arr) << endl;
+  cout << largestOptimal(arr) << endl;
   return 0;
 }

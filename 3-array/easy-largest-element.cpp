@@ -9,3 +9,13 @@ int largest(vector<int> &arr, int n) {
       mini = i;
   return mini;
 }
+
+int main() {
+  int n;
+  cin >> n;
+  vector<int> arr(n);
+  for (auto &i : arr)
+    cin >> i;
+  cout << largest(arr, n) << endl;
+  return 0;
+}

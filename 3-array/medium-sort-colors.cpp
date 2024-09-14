@@ -46,7 +46,7 @@ void sortColorsOptiV1(vector<int> &nums) {
 }
 
 /*
-  Optimal approach 2:
+  Optimal approach 2: (Dutch National Flag Algorithm)
   Time complexity: O(n)
   Space complexity: O(1)
 */

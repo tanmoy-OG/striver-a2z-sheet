@@ -17,7 +17,7 @@ void print2ndSmallLargeBrute(vector<int> &arr) {
 }
 
 /*
-  Time Complexity: O(n) (2 traversals)
+  Time Complexity: O(2n) (2 traversals)
   Space Complexity: O(1)*/
 
 void print2ndSmallLargeBetter(vector<int> &arr) {

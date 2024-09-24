@@ -24,7 +24,7 @@ int majorityElementBrute(vector<int> &nums) {
 
 /*
   Better approach:
-  Time complexity: O(nlogn)
+  Time complexity: O(2n)
   Space complexity: O(n)
 */
 
@@ -46,7 +46,7 @@ int majorityElementBetter(vector<int> &nums) {
 
 /*
   Optimized approach: (Boyer-Moore Voting Algorithm)
-  Time complexity: O(n)
+  Time complexity: O(2n)
   Space complexity: O(1)
 */
 

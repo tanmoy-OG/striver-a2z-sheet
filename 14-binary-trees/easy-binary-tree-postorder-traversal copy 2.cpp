@@ -19,16 +19,16 @@ public:
 vector<int> optimalCommon(TreeNode *root)
 {
   vector<int> v;
-  inOrder(root, v);
+  postOrder(root, v);
   return v;
 }
-void inOrder(TreeNode *root, vector<int> &v)
+void postOrder(TreeNode *root, vector<int> &v)
 {
   if (root == NULL)
     return;
-  inOrder(root->left, v);
+  postOrder(root->left, v);
+  postOrder(root->right, v);
   v.push_back(root->val);
-  inOrder(root->right, v);
 }
 
 /*------------------------------------*/
@@ -37,14 +37,45 @@ void inOrder(TreeNode *root, vector<int> &v)
   Time complexity: O(n)
   Space complexity: O(h)
 */
+vector<int> bruteIterative(TreeNode *root)
+{
+  vector<int> v;
+  if (root == NULL)
+    return v;
+  stack<TreeNode *> st1, st2;
+  TreeNode *node = root;
+  st1.push(node);
+  while (!st1.empty())
+  {
+    node = st1.top();
+    st1.pop();
+    st2.push(node);
+    if (node->left != NULL)
+      st1.push(node->left);
+    if (node->right != NULL)
+      st1.push(node->right);
+  }
+  while (!st2.empty())
+  {
+    node = st2.top();
+    st2.pop();
+    v.push_back(node->val);
+  }
+  return v;
+}
+
+/*------------------------------------*/
+
+/*
+  Time complexity: O(n)
+  Space complexity: O(n)
+*/
 vector<int> optimalIterative(TreeNode *root)
 {
   vector<int> v;
-  TreeNode *node = root;
-  if (root == NULL)
-    return v;
   stack<TreeNode *> st;
-  while (true)
+  TreeNode *node = root;
+  while (node != NULL || !st.empty())
   {
     if (node != NULL)
     {
@@ -53,12 +84,21 @@ vector<int> optimalIterative(TreeNode *root)
     }
     else
     {
-      if (st.empty())
-        break;
-      node = st.top();
-      st.pop();
-      v.push_back(node->val);
-      node = node->right;
+      TreeNode *temp = st.top()->right;
+      if (temp == NULL)
+      {
+        temp = st.top();
+        st.pop();
+        v.push_back(temp->val);
+        while (!st.empty() && temp == st.top()->right)
+        {
+          temp = st.top();
+          st.pop();
+          v.push_back(temp->val);
+        }
+      }
+      else
+        node = temp;
     }
   }
   return v;
@@ -75,6 +115,13 @@ int main()
   root->left->right = new TreeNode(5);
 
   vector<int> res = optimalCommon(root);
+  for (int val : res)
+  {
+    cout << val << " ";
+  }
+  cout << endl;
+
+  vector<int> res = bruteIterative(root);
   for (int val : res)
   {
     cout << val << " ";

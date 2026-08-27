@@ -16,7 +16,7 @@ public:
   Time complexity: O(n)
   Space complexity: O(n)
 */
-int optimalRecursion(TreeNode *root)
+int optimalDfs(TreeNode *root)
 {
   int maxi = dfs(root);
   return maxi;
@@ -76,7 +76,7 @@ int main()
   root->left->left = new TreeNode(4);
   root->left->right = new TreeNode(5);
 
-  cout << optimalRecursion(root) << endl;
+  cout << optimalDfs(root) << endl;
   cout << optimalBfs(root) << endl;
 
   return 0;

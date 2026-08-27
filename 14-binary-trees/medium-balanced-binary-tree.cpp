@@ -16,20 +16,20 @@ public:
   Time complexity: O(n)
   Space complexity: O(n)
 */
-int optimalBfs(TreeNode *root)
+int optimalDfs(TreeNode *root)
 {
   if (root == NULL)
     return true;
-  return bfs(root) != -1;
+  return dfs(root) != -1;
 }
-int bfs(TreeNode *node)
+int dfs(TreeNode *node)
 {
   if (node == NULL)
     return 0;
-  int lh = bfs(node->left);
+  int lh = dfs(node->left);
   if (lh == -1)
     return -1;
-  int rh = bfs(node->right);
+  int rh = dfs(node->right);
   if (rh == -1)
     return -1;
   return abs(lh - rh) > 1 ? -1 : 1 + max(lh, rh);
@@ -45,7 +45,7 @@ int main()
   root->left->left = new TreeNode(4);
   root->left->right = new TreeNode(5);
 
-  cout << optimalBfs(root) << endl;
+  cout << optimalDfs(root) << endl;
 
   return 0;
 }

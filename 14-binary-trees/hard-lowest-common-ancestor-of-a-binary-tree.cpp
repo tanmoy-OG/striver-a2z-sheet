@@ -16,22 +16,17 @@ public:
   Time complexity: O(n)
   Space complexity: O(n)
 */
-int optimalDfs(TreeNode *root)
+TreeNode *optimalDfs(TreeNode *node, TreeNode *p, TreeNode *q)
 {
-  if (root == NULL)
-    return 0;
-  int maxi = 0;
-  dfs(root, maxi);
-  return maxi;
-}
-int dfs(TreeNode *node, int maxi)
-{
-  if (node == NULL)
-    return 0;
-  int lh = dfs(node->left, maxi);
-  int rh = dfs(node->right, maxi);
-  maxi = max(maxi, lh + rh);
-  return 1 + max(lh, rh);
+  if (node == NULL || node == p || node == q)
+    return node;
+  TreeNode *left = optimalDfs(node->left, p, q);
+  TreeNode *right = optimalDfs(node->right, p, q);
+  if (left == NULL)
+    return right;
+  if (right == NULL)
+    return left;
+  return node;
 }
 
 /*------------------------------------*/
@@ -44,7 +39,10 @@ int main()
   root->left->left = new TreeNode(4);
   root->left->right = new TreeNode(5);
 
-  cout << optimalDfs(root) << endl;
+  TreeNode *p = root->left;
+  TreeNode *q = root->left->right;
+
+  cout << optimalDfs(root, p, q) << endl;
 
   return 0;
 }

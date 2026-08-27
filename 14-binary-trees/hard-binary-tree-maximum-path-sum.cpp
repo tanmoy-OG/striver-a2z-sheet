@@ -18,9 +18,7 @@ public:
 */
 int optimalDfs(TreeNode *root)
 {
-  if (root == NULL)
-    return 0;
-  int maxi = 0;
+  int maxi = INT_MIN;
   dfs(root, maxi);
   return maxi;
 }
@@ -28,10 +26,10 @@ int dfs(TreeNode *node, int maxi)
 {
   if (node == NULL)
     return 0;
-  int lh = dfs(node->left, maxi);
-  int rh = dfs(node->right, maxi);
-  maxi = max(maxi, lh + rh);
-  return 1 + max(lh, rh);
+  int lSum = max(0, dfs(node->left, maxi));
+  int rSum = max(0, dfs(node->right, maxi));
+  maxi = max(maxi, lSum + rSum + node->val);
+  return node->val + max(lSum, rSum);
 }
 
 /*------------------------------------*/

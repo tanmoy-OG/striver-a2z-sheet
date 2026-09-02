@@ -13,32 +13,37 @@ public:
 };
 
 /*
-  Time complexity: O(n)
-  Space complexity: O(n/2)
+  Time complexity: O(2n)
+  Space complexity: O(1)
 */
-vector<vector<int>> optimal(TreeNode *root)
+vector<int> optimal(TreeNode *root)
 {
-  vector<vector<int>> v;
-  if (root == NULL)
-    return v;
-  queue<TreeNode *> q;
+  vector<int> v;
   TreeNode *node = root;
-  q.push(node);
-  while (!q.empty())
+  while (node)
   {
-    vector<int> temp;
-    int size = q.size();
-    for (int i = 0; i < size; i++)
+    if (node->left == NULL)
     {
-      node = q.front();
-      q.pop();
-      temp.push_back(node->val);
-      if (node->left != NULL)
-        q.push(node->left);
-      if (node->right != NULL)
-        q.push(node->right);
+      v.push_back(node->val);
+      node = node->right;
     }
-    v.push_back(temp);
+    else
+    {
+      TreeNode *prev = node->left;
+      while (prev->right && prev->right != node)
+        prev = prev->right;
+      if (prev->right == NULL)
+      {
+        prev->right = node;
+        v.push_back(node->val);
+        node = node->left;
+      }
+      else
+      {
+        prev->right = NULL;
+        node = node->right;
+      }
+    }
   }
   return v;
 }
@@ -53,14 +58,10 @@ int main()
   root->left->left = new TreeNode(4);
   root->left->right = new TreeNode(5);
 
-  vector<vector<int>> res = optimal(root);
-  for (auto level : res)
+  vector<int> res = optimal(root);
+  for (int val : res)
   {
-    for (int val : level)
-    {
-      cout << val << " ";
-    }
-    cout << endl;
+    cout << val << " ";
   }
   cout << endl;
 

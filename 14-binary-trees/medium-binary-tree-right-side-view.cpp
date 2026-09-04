@@ -84,7 +84,7 @@ int main()
   for (int val : res)
     cout << val << " ";
   cout << endl;
-  
+
   vector<int> res = optimal(root);
   for (int val : res)
     cout << val << " ";

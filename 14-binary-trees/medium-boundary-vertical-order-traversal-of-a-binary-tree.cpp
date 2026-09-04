@@ -51,8 +51,9 @@ int main()
   root->left->right = new TreeNode(5);
 
   vector<vector<int>> vals = optimal(root);
-  for (auto vals: vals) {
-    for(auto val: vals)
+  for (auto vals : vals)
+  {
+    for (auto val : vals)
       cout << val << ", ";
     cout << endl;
   }

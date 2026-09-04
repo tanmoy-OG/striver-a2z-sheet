@@ -74,7 +74,7 @@ int main()
     cout << val << " ";
   }
   cout << endl;
-  
+
   vector<int> res = optimalIterative(root);
   for (int val : res)
   {

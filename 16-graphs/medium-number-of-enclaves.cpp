@@ -4,7 +4,7 @@ using namespace std;
 
 /*
   Optimized approach:
-  Time complexity: O(2m + 2n + 5mxn) (traversal of the matrix boundaries + dfs traversal of each nodes and 4 times loop iteration for each efs traversal + traversal of visited matrix for the counter)
+  Time complexity: O(2m + 2n + 5mxn) (traversal of the matrix boundaries + dfs traversal of each nodes and 4 times loop iteration for each dfs traversal + traversal of visited matrix for the counter)
   Space complexity: O(2mxn) (visited matrix + recursion stack space)
 */
 
